@@ -1,0 +1,8 @@
+/Model_Dev/logs
+/Model_Dev/D1.pickle
+/Model_Dev/D2.pickle
+/Model_Dev/D3.pickle
+/Model_Dev/D4.pickle
+/Preprocessing_Phase/emnist-balanced-mapping.txt
+/Preprocessing_Phase/emnist-balanced-test.csv
+/Preprocessing_Phase/emnist-balanced-train.csv
