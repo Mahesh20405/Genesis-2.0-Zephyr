@@ -1,0 +1,39 @@
+/* App Container */
+div.App {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    background-color: #ffffff; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+/* Title */
+.Title {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 28px; 
+    color: #333;
+}
+
+.Title p {
+    margin: 0;
+    font-size: 20px;
+    color: #666;
+}
+
+button, .button {
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6cbee4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, .button:hover {
+    background-color: #5aa3c7;
+    transform: scale(1.05); 
+}

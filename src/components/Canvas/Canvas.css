@@ -1,0 +1,28 @@
+/* Canvas Container */
+div.p5-canvas {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Canvas */
+div.canvas {
+    padding-top: 10px;
+    padding-bottom: 100px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border: 2px solid #000000;
+}
+
+/* Progress Bar */
+div.progress {
+    width: 400px; 
+    margin: 20px auto;
+}
+
+/* Icon Styles */
+img.trashIcon, img.undoIcon, img.plusCircle, img.minusCircle {
+    width: 45px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease-in-out;
+  }
