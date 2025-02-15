@@ -2,26 +2,26 @@ import React, { Component } from "react";
 import P5Wrapper from "react-p5-wrapper";
 import axios from "axios";
 import trashIcon from '../../images/trash_icon.svg';
-import "./Canvas.css";
+import "./Panel.css";
 
 // Configure axios with CSRF settings
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;  // Important for CSRF
-class Canvas extends Component {
+class Panel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			drawing: [],
 			submitted: false,
 			prediction: "",
-			canvasLength: localStorage.getItem('width') || 300,
+			panelLength: localStorage.getItem('width') || 300,
 			minLength: 300,
 			maxLength: 2000,
 			drawings: [],
 			predictionProgress: '',
 			predBtnCountdown: 0,
-			showCanvas: false,
+			showPanel: false,
 			uploadedImage: null // New state to store uploaded image
 		};
 		this.sketch = this.sketch.bind(this);
@@ -29,7 +29,7 @@ class Canvas extends Component {
 		this.handleImageUpload = this.handleImageUpload.bind(this); // New method for image upload
 		this.handleSubmitPrediction = this.handleSubmitPrediction.bind(this);
 		this.handleOnClickDelete = this.handleOnClickDelete.bind(this);
-		this.handleUseCanvas = this.handleUseCanvas.bind(this);
+		this.handleUsePanel = this.handleUsePanel.bind(this);
 	}
 
 	async fileUploadHandler(img) {
@@ -53,9 +53,9 @@ class Canvas extends Component {
 			return new Blob([ia], { type: mimeString });
 		}
 
-		var canvasInput = document.getElementById("defaultCanvas0");
-		var canvasImg = canvasInput.toDataURL();
-		var file = dataURItoBlob(canvasImg);
+		var panelInput = document.getElementById("defaultPanel0");
+		var panelImg = panelInput.toDataURL();
+		var file = dataURItoBlob(panelImg);
 
 		const fd = new FormData();
 		fd.append("image", file);
@@ -144,7 +144,7 @@ class Canvas extends Component {
     }
 
 	sketch = p => {
-		var canvas;
+		var panel;
 		var drawings = this.state.drawings;
 
 		var drawingStorage = localStorage.getItem('drawings')
@@ -159,12 +159,12 @@ class Canvas extends Component {
 		var currentPath = [];
 		var isDrawing = false;
 		p.setup = () => {
-			canvas = p.createCanvas(this.state.canvasLength, 200);
+			panel = p.createPanel(this.state.panelLength, 200);
 			p.noStroke();
-			canvas.mousePressed(p.startPath);
-			canvas.touchStarted(p.startPath)
-			canvas.mouseReleased(p.endPath);
-			canvas.touchEnded(p.endPath)
+			panel.mousePressed(p.startPath);
+			panel.touchStarted(p.startPath)
+			panel.mouseReleased(p.endPath);
+			panel.touchEnded(p.endPath)
 		};
 
 		p.startPath = () => {
@@ -175,21 +175,21 @@ class Canvas extends Component {
 				drawings: drawings
 			})
 
-			var canvasHTML = document.getElementById("defaultCanvas0");
+			var panelHTML = document.getElementById("defaultPanel0");
 
 			document.body.addEventListener("touchstart", function (e) {
-				if (e.target === canvasHTML) {
+				if (e.target === panelHTML) {
 					console.log('inside touchstart')
 					e.preventDefault();
 				}
 			}, { passive: false });
 			document.body.addEventListener("touchend", function (e) {
-				if (e.target === canvasHTML) {
+				if (e.target === panelHTML) {
 					e.preventDefault();
 				}
 			}, { passive: false });
 			document.body.addEventListener("touchmove", function (e) {
-				if (e.target === canvasHTML) {
+				if (e.target === panelHTML) {
 					e.preventDefault();
 				}
 			}, { passive: false });
@@ -241,7 +241,7 @@ class Canvas extends Component {
 				this.setState({
 					submitted: false
 				});
-				const img = canvas.get();
+				const img = panel.get();
 
 				this.fileUploadHandler(img);
 			}
@@ -262,8 +262,8 @@ class Canvas extends Component {
 		})
 	}
 
-	handleUseCanvas = () => {
-		this.setState({ showCanvas: true });
+	handleUsePanel = () => {
+		this.setState({ showPanel: true });
 	}
 
 	render() {
@@ -273,12 +273,12 @@ class Canvas extends Component {
 		const predCountdown = this.state.predBtnCountdown === 0 ? '' : `: ${this.state.predBtnCountdown}`
 
 		return (
-			<div className="canvas">
-				{!this.state.showCanvas ? (
+			<div className="panel">
+				{!this.state.showPanel ? (
 					<button
-						className="btn waves-effect waves-light blue darken-1 use-canvas"
-						onClick={this.handleUseCanvas}
-					>Use Canvas</button>
+						className="btn waves-effect waves-light blue darken-1 use-panel"
+						onClick={this.handleUsePanel}
+					>Use Panel</button>
 				) : (
 					<>
 						<div className="toolbar">
@@ -299,7 +299,7 @@ class Canvas extends Component {
 							</label>
 						</div>
 
-						<div className="p5-canvas">
+						<div className="p5-panel">
 							<P5Wrapper className="P5Wrapper" sketch={this.sketch} />
 						</div>
 
@@ -328,4 +328,4 @@ class Canvas extends Component {
 	}
 }
 
-export default Canvas;
+export default Panel;

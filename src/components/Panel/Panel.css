@@ -1,11 +1,11 @@
-/* Canvas Container */
-div.p5-canvas {
+/* Panel Container */
+div.p5-panel {
     margin-top: 10px;
     cursor: pointer;
 }
 
-/* Canvas */
-div.canvas {
+/* Panel */
+div.panel {
     padding-top: 10px;
     padding-bottom: 100px;
     background-color: rgba(255, 255, 255, 0.8); 
